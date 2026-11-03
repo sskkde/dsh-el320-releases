@@ -4,9 +4,46 @@
 
 ## 获取与安装
 
-请前往 [Releases](https://github.com/sskkde/dsh-el320-releases/releases/latest) 下载最新稳定版的 `dsh-el320-<版本>.tgz` 和 `SHA256SUMS`。
+前往 [Releases](https://github.com/sskkde/dsh-el320-releases/releases/latest) 下载最新稳定版：
 
-通过 DSH 宿主的插件管理器安装 TGZ，完成后重启 DSH。自 0.1.83 起，插件提供自动检查、更新提示和用户确认后的升级入口；首次使用仍需先安装一次包含该功能的版本。
+- `dsh-el320-<版本>.tgz`：预构建插件包，直接安装；
+- `SHA256SUMS`：校验文件，用于确认包完整且未被篡改。
+
+下载后先校验（Linux / macOS）：
+
+```bash
+sha256sum -c SHA256SUMS
+```
+
+> 只把 TGZ 解压到任意目录不等于已完成 DSH 装配，必须通过 DSH 宿主的插件管理器安装。
+
+### 官方桌面端
+
+1. 打开桌面应用一次，让 profile 完成初始化，然后完全退出；
+2. 使用桌面应用自带的 `dsh`（不是 npm 全局 CLI）安装：
+
+```bash
+dsh plugin --profile desktop add /绝对路径/dsh-el320-<版本>.tgz
+```
+
+3. 重新打开桌面应用。
+
+也可以在桌面端侧栏「插件」中直接选择 TGZ 安装。
+
+### DSH Web 宿主
+
+```bash
+dsh plugin --profile web add /绝对路径/dsh-el320-<版本>.tgz
+```
+
+随后按该宿主的管理方式重启实例。
+
+### 安装后
+
+- 重启 DSH 后生效；刷新网页不能代替宿主重启。
+- 自 0.1.83 起，工作台与回放面板内提供版本检查与更新入口；首次使用仍需先安装一次包含更新能力的版本。
+- 飞参译码定义已随包内置基线，可用环境变量 `EL320_FLIGHT_PROFILE`（单文件）或 `EL320_FLIGHT_PROFILES_DIR`（目录）覆盖。
+- 遥测录制数据与遥测协议（proto）需按现有配置自行提供，不随插件分发。
 
 ## 更新说明
 
